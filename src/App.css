@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root,
+.appContainer {
+  height: 100%;
+}
+
+body {
+  background-color: #0b0e10;
+  color: #fff;
+}
+.tweetContainer {
+  background-color: #0b0e10;
+  margin: auto;
+  color: #fff;
+  position: relative;
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  width: 450px;
+}
+.textarea {
+  background-color: #0b0e10;
+  padding: 12px 20px;
+  border: none;
+  resize: none;
+  color: #ccc;
+  width: 380px;
+  height: 120px;
+  font-family: "Courier New", Courier, monospace;
+}
+.enterTweet {
+  background-color: #0b0e10;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  color: #ccc;
+  width: 450px;
+  height: 170px;
+}
+.tweetButton {
+  position: relative;
+  float: right;
+  top: -45px;
+  align-items: center;
+  appearance: button;
+  background-color: #0276ff;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  font-family: "RM Neue", sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  padding: 10px 21px;
+  text-align: center;
+  text-transform: none;
+  transition: color 0.13s ease-in-out, background 0.13s ease-in-out,
+    opacity 0.13s ease-in-out, box-shadow 0.13s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.tweetButton:active {
+  background-color: #006ae8;
+}
+
+.tweetButton:hover {
+  background-color: #1c84ff;
+}
+.tweetBox {
+  margin: auto;
+  width: 400px;
+  margin: 20px 0;
+  background-color: #242a2d;
+}
+
+.tweetTop {
+  display: flex;
+  justify-content: space-around;
+}
+.tweetDate {
+  float: left;
+}
+.tweetText {
+  top: -15px;
+}
+
+.tweetList {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
