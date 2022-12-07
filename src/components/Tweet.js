@@ -1,8 +1,7 @@
 import React from "react";
-import LoadingSpinner from "./LoadingSpinner.js";
 
 
-const Tweet = ({ tweet, isLoading }) => {
+const Tweet = ({ tweet }) => {
 
   return (
    

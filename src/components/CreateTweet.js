@@ -10,15 +10,16 @@ function CreateTweet({ addTweet,isLoading }) {
   };
 
   const tweetDate = new Date();
-
+  const userName = JSON.parse(localStorage.getItem("userName"));
   const printTweet = (e) => {
     e.preventDefault();
     const newTweet = {
       date: tweetDate.toISOString(),
       content: text,
-      userName: "sv",
+      userName: userName,
       id: nanoid(),
     };
+    
 
     if (text.length > 0) {
       addTweet(newTweet);

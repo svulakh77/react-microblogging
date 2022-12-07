@@ -4,18 +4,19 @@ import CreateTweet from "./components/CreateTweet.js";
 import TweetList from "./components/TweetsList.js";
 import { useEffect } from "react";
 import axios from "axios";
-import LoadingSpinner from "./components/LoadingSpinner.js";
-
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Profile from "./components/Profile.js";
+import { useNavigate, useParams } from "react-router-dom";
 
 function App() {
   const [tweets, setTweets] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  
   const addTweet = (newTweet) => {
     setIsLoading(true);
-    console.log(newTweet);
     const newArray = [newTweet, ...tweets];
     setTweets(newArray);
-   setIsLoading(false);
+    setIsLoading(false);
   };
 
   async function fetchData() {
@@ -38,12 +39,33 @@ function App() {
         tweetData
       )
       .then(fetchData);
-  };
+  };   
+   
 
   return (
     <div className="appContainer">
-      <CreateTweet addTweet={addTweet} onAdd={postTweet} isLoading={isLoading}/>
-      <TweetList tweets={tweets} isLoading={isLoading} />
+      <Router>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/profile">Profile</Link>
+        </nav>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <CreateTweet
+                  addTweet={addTweet}
+                  onAdd={postTweet}
+                  isLoading={isLoading}
+                />
+                <TweetList tweets={tweets} isLoading={isLoading} />
+              </>
+            }
+          ></Route>
+          <Route path="/profile" element={<Profile tweets={tweets}/>}></Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
