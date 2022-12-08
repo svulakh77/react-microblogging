@@ -1,22 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { nanoid } from "nanoid";
 import axios from "axios";
 import { Alert } from "react-bootstrap";
+import SomeContext from "../Context.js";
 
-function CreateTweet({ addTweet,isLoading }) {
+function CreateTweet() {
+  const {addTweet} = useContext(SomeContext);
+
+
   const [text, setText] = useState("");
   const handleTweet = (e) => {
     setText(e.target.value);
   };
 
   const tweetDate = new Date();
-  const userName = JSON.parse(localStorage.getItem("userName"));
+  const temp = localStorage.getItem("userName")||"sv";
   const printTweet = (e) => {
     e.preventDefault();
     const newTweet = {
       date: tweetDate.toISOString(),
       content: text,
-      userName: userName,
+      userName: temp,
       id: nanoid(),
     };
     

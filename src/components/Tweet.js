@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import SomeContext from "../Context.js";
 
 
-const Tweet = ({ tweet }) => {
-
+const Tweet = ({tweet}) => {
   return (
    
     <div className="tweetBox">

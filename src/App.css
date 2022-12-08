@@ -121,3 +121,12 @@ body {
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
 }
+.nav{
+  display: inline;
+  background-color: #242a2d;
+}
+.link{
+  display: block;
+  padding: 8px;
+  background-color: #242a2d;
+}

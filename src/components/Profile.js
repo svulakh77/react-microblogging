@@ -1,6 +1,8 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useContext } from 'react'
+import SomeContext from '../Context.js';
 
-function Profile({tweets}) {
+function Profile() {
+
   const[newUserName,setNewUserName]=useState([]);
   const [userName,setUserName]=useState();
  

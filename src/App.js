@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import CreateTweet from "./components/CreateTweet.js";
 import TweetList from "./components/TweetsList.js";
 import { useEffect } from "react";
@@ -7,6 +7,8 @@ import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Profile from "./components/Profile.js";
 import { useNavigate, useParams } from "react-router-dom";
+import SomeContext from "./Context.js";
+
 
 function App() {
   const [tweets, setTweets] = useState([]);
@@ -15,7 +17,7 @@ function App() {
   const addTweet = (newTweet) => {
     setIsLoading(true);
     const newArray = [newTweet, ...tweets];
-    setTweets(newArray);
+    setTweets((prevTweets)=>[newTweet, ...prevTweets]);
     setIsLoading(false);
   };
 
@@ -43,30 +45,29 @@ function App() {
    
 
   return (
+    <SomeContext.Provider value={{tweets, addTweet, postTweet, isLoading,setIsLoading}}>
     <div className="appContainer">
       <Router>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/profile">Profile</Link>
+        <nav className="nav">
+          <Link classname="link" to="/">Home</Link>
+          <Link classname="link" to="/profile">Profile</Link>
         </nav>
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <CreateTweet
-                  addTweet={addTweet}
-                  onAdd={postTweet}
-                  isLoading={isLoading}
-                />
-                <TweetList tweets={tweets} isLoading={isLoading} />
+                <CreateTweet/>
+                <TweetList/>
               </>
             }
           ></Route>
-          <Route path="/profile" element={<Profile tweets={tweets}/>}></Route>
+          <Route path="/profile" element={<Profile/>}></Route>
         </Routes>
       </Router>
     </div>
+    </SomeContext.Provider>
+   
   );
 }
 
