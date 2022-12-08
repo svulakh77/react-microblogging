@@ -5,7 +5,7 @@ import { Alert } from "react-bootstrap";
 import SomeContext from "../Context.js";
 
 function CreateTweet() {
-  const {addTweet} = useContext(SomeContext);
+  const {addTweet,userName,uname} = useContext(SomeContext);
 
 
   const [text, setText] = useState("");
@@ -14,13 +14,13 @@ function CreateTweet() {
   };
 
   const tweetDate = new Date();
-  const temp = localStorage.getItem("userName")||"sv";
+ 
   const printTweet = (e) => {
     e.preventDefault();
     const newTweet = {
       date: tweetDate.toISOString(),
       content: text,
-      userName: temp,
+      userName: userName,
       id: nanoid(),
     };
     
