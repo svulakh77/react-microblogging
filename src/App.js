@@ -70,12 +70,6 @@ function App() {
     localStorage.setItem("userName", JSON.stringify(userName));
   }, [userName]);
 
-  // const[update,setUpdate]=useState("")
-  // useEffect(()=>{
-  //   setIterval(()=>{
-  //     setUpdate((prevTweet)=>prevTweet+1)
-  //   }, tweets)
-  // }, [tweets])
   
   return (
     <SomeContext.Provider
