@@ -7,8 +7,8 @@ const Tweet = ({tweet}) => {
    
     <div className="tweetBox">
           <div className="tweetTop">
-              <h6 className="tweetInfo userName">{tweet.userName}</h6>
-              <h6 className="tweetInfo tweetDate">{tweet.date}</h6>
+              <div className="tweetInfo userName">{tweet.userName}</div>
+              <div className="tweetInfo tweetDate">{tweet.date}</div>
           </div>
           <div className="tweetInfo tweetText">{tweet.content}</div>
       </div>

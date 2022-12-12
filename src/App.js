@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import CreateTweet from "./components/CreateTweet.js";
 import TweetList from "./components/TweetsList.js";
 import { useEffect } from "react";
@@ -7,17 +7,21 @@ import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Profile from "./components/Profile.js";
 import SomeContext from "./Context.js";
+import { collection, getDocs } from "firebase/firestore";
+import {db} from './firebase';
 
 function App() {
   const [tweets, setTweets] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const addTweet = (newTweet) => {
-    setIsLoading(true);
-    const newArray = [newTweet, ...tweets];
-    setTweets((prevTweets) => [newTweet, ...prevTweets]);
-    setIsLoading(false);
-  };
+  // const addTweet = (newTweet) => {
+  //   setIsLoading(true);
+  //   const newArray = [newTweet, ...tweets];
+  //   setTweets((prevTweets) => [newTweet, ...prevTweets]);
+  //   setIsLoading(false);
+  // };
+
+
 
   async function fetchData() {
     try {
@@ -29,12 +33,12 @@ function App() {
       console.log(error);
     }
   }
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetchData();
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     fetchData();
+  //   }, 2000);
+  //   return () => clearInterval(interval);
+  // }, []);
    
   const postTweet = (tweetData) => {
     axios
@@ -75,7 +79,8 @@ function App() {
     <SomeContext.Provider
       value={{
         tweets,
-        addTweet,
+        setTweets,
+        // addTweet,
         postTweet,
         isLoading,
         setIsLoading,
@@ -89,10 +94,10 @@ function App() {
       <div className="appContainer">
         <Router>
           <nav className="nav">
-            <Link classname="link" to="/">
+            <Link className="link" to="/">
               Home
             </Link>
-            <Link classname="link" to="/profile">
+            <Link className="link" to="/profile">
               Profile
             </Link>
           </nav>
