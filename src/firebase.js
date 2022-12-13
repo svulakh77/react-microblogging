@@ -1,18 +1,20 @@
 import { initializeApp } from "firebase/app";
 import {getFirestore} from 'firebase/firestore';
+import {getAuth} from 'firebase/auth';
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCPzEE7werBqT-743vGGys2Dq21QLnlSAk",
-  authDomain: "shevamicro.firebaseapp.com",
-  projectId: "shevamicro",
-  storageBucket: "shevamicro.appspot.com",
-  messagingSenderId: "861788363236",
-  appId: "1:861788363236:web:89952184580df825200ff1",
-  measurementId: "G-J4E0MNNHMQ"
-}
+  apiKey: "AIzaSyDHNg5xsxgh4OSoaRTOeoibTe2qVUfG7_k",
+  authDomain: "newmicroblog-eca05.firebaseapp.com",
+  projectId: "newmicroblog-eca05",
+  storageBucket: "newmicroblog-eca05.appspot.com",
+  messagingSenderId: "814067894171",
+  appId: "1:814067894171:web:c283dc6f3c80bd8f33033e"
+};
+
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-export{db}
+export{db,auth}

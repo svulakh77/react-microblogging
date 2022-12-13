@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import SomeContext from "../Context.js";
+import React from "react";
+
 
 
 const Tweet = ({tweet}) => {

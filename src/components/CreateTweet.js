@@ -1,6 +1,6 @@
 import React, { useContext, useState,useEffect } from "react";
 import { nanoid } from "nanoid";
-import axios from "axios";
+// import axios from "axios";
 import SomeContext from "../Context.js";
 import { collection, addDoc, getDocs} from "firebase/firestore";
 import {db} from '../firebase';
@@ -43,7 +43,7 @@ function CreateTweet() {
 
 useEffect(()=>{
     fetchTweet();
-}, [tweets])
+}, [])
 
   const [text, setText] = useState("");
   const handleTweet = (e) => {
@@ -51,21 +51,21 @@ useEffect(()=>{
   };
 
  
-  const printTweet = (e) => {
-    e.preventDefault();
-    const newTweet = {
-      date: tweetDate.toISOString(),
-      content: text,
-      userName: userName,
-      id: nanoid(),
-    };
+  // // const printTweet = (e) => {
+  // //   e.preventDefault();
+  // //   const newTweet = {
+  // //     date: tweetDate.toISOString(),
+  // //     content: text,
+  // //     userName: userName,
+  // //     id: nanoid(),
+  // //   };
     
 
-    if (text.length > 0) {
-      addTweet(newTweet);
-      setText("");
-    }
-  };
+  //   if (text.length > 0) {
+  //     addTweet(newTweet);
+  //     setText("");
+  //   }
+  // };
   return (
     <div className="tweetContainer">
       <form className="textContainer">

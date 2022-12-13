@@ -8,7 +8,7 @@ const {handleNewUserName,handleUserNameInput,newUserName} = useContext(SomeConte
       <h1>Profile</h1>
       <h3>User Name</h3>
       <form onSubmit={handleNewUserName}>
-        <input onChange={handleUserNameInput} value={newUserName}/>
+        <input className="loginInput" onChange={handleUserNameInput} value={newUserName}/>
         <button type="submit">Save</button>
       </form>
      
