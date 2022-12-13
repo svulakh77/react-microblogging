@@ -4,15 +4,15 @@ import CreateTweet from "./components/CreateTweet.js";
 import TweetList from "./components/TweetsList.js";
 import { useEffect } from "react";
 import axios from "axios";
-import {  Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import Profile from "./components/Profile.js";
-import Login from './components/Login.js';
-import SignUp from './components/SignUp.js';
+import Login from "./components/Login.js";
+import SignUp from "./components/SignUp.js";
 import SomeContext from "./Context.js";
 import PrivateRoute from "./components/PrivateRoute.js";
 import HomePage from "./components/HomePage.js";
 import { signOut } from "firebase/auth";
-import { auth,db } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 import { useNavigate } from "react-router-dom";
 import { ref, onValue } from "firebase/database";
 import Navbar from "./components/NavBar.js";
@@ -20,14 +20,13 @@ import NotAuthNavbar from "./components/NotAuthNavBar.js";
 import GoogleLogin from "./components/GoogleSignIn.js";
 // import { collection, getDocs } from "firebase/firestore";
 
-
 function App() {
   const [tweets, setTweets] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('currentUser')) || false);
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("currentUser")) || false
+  );
   const navigate = useNavigate();
-
-  
 
   const clickLogin = () => {
     if (currentUser) {
@@ -39,14 +38,6 @@ function App() {
   const clickSignup = () => {
     navigate("/signup");
   };
-  // const addTweet = (newTweet) => {
-  //   setIsLoading(true);
-  //   const newArray = [newTweet, ...tweets];
-  //   setTweets((prevTweets) => [newTweet, ...prevTweets]);
-  //   setIsLoading(false);
-  // };
-
-
 
   async function fetchData() {
     try {
@@ -64,7 +55,7 @@ function App() {
   //   }, 2000);
   //   return () => clearInterval(interval);
   // }, []);
-   
+
   const postTweet = (tweetData) => {
     axios
       .post(
@@ -111,7 +102,6 @@ function App() {
     localStorage.setItem("userName", JSON.stringify(userName));
   }, [userName]);
 
-  
   return (
     <SomeContext.Provider
       value={{
@@ -130,30 +120,29 @@ function App() {
       }}
     >
       <div className="appContainer">
-      {currentUser ? <Navbar /> : <NotAuthNavbar />}
-          <Routes>
+        {currentUser ? <Navbar /> : <NotAuthNavbar />}
+        <Routes>
           <Route
-          path='/'
-          element={
-            <PrivateRoute currentUser={currentUser}>
-              <HomePage />
-            </PrivateRoute>
-          }
-        ></Route>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/signup' element={<SignUp />}></Route>
-            <Route
-              path="/"
-              element={
-                <>
-                  <CreateTweet />
-                  <TweetList />
-                </>
-              }
-            ></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-          </Routes>
-    
+            path="/"
+            element={
+              <PrivateRoute currentUser={currentUser}>
+                <HomePage />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
+          <Route
+            path="/"
+            element={
+              <>
+                <CreateTweet />
+                <TweetList />
+              </>
+            }
+          ></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+        </Routes>
       </div>
     </SomeContext.Provider>
   );
