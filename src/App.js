@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { ref, onValue } from "firebase/database";
 import Navbar from "./components/NavBar.js";
 import NotAuthNavbar from "./components/NotAuthNavBar.js";
+import GoogleLogin from "./components/GoogleSignIn.js";
 // import { collection, getDocs } from "firebase/firestore";
 
 
@@ -92,23 +93,23 @@ function App() {
   //   setUserName(temp);
   // };
 
-  // const handleUserNameInput = (e) => {
-  //   e.preventDefault();
-  //   setNewUserName(e.target.value);
-  // };
-  // const handleNewUserName = (e) => {
-  //   e.preventDefault();
-  //   if (newUserName.length > 0) {
-  //     addUserName();
-  //   }
-  // };
-  // const addUserName = () => {
-  //   console.log(newUserName);
-  //   setUserName(newUserName);
-  // };
-  // useEffect(() => {
-  //   localStorage.setItem("userName", JSON.stringify(userName));
-  // }, [userName]);
+  const handleUserNameInput = (e) => {
+    e.preventDefault();
+    setNewUserName(e.target.value);
+  };
+  const handleNewUserName = (e) => {
+    e.preventDefault();
+    if (newUserName.length > 0) {
+      addUserName();
+    }
+  };
+  const addUserName = () => {
+    console.log(newUserName);
+    setUserName(newUserName);
+  };
+  useEffect(() => {
+    localStorage.setItem("userName", JSON.stringify(userName));
+  }, [userName]);
 
   
   return (
@@ -121,8 +122,8 @@ function App() {
         postTweet,
         isLoading,
         setIsLoading,
-        // handleNewUserName,
-        // handleUserNameInput,
+        handleNewUserName,
+        handleUserNameInput,
         newUserName,
         userName,
         // uname,

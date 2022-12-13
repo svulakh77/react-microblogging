@@ -17,6 +17,7 @@ function CreateTweet() {
    
     try {      
         const idTweet = await addDoc(collect, {
+          userName:userName,
           date: tweetDate.toISOString(),
       content: text,
       id: nanoid(),  
