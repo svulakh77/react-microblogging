@@ -24,7 +24,7 @@ function CreateTweet() {
         userName: currentUser.email,
         date: tweetDate.toISOString(),
         content: text,
-        id: nanoid(),
+        id: currentUser.uid,
       }
       const idTweet = await addDoc(collect, tweetTweet);
       const newArray = [tweetTweet, ...tweets];
@@ -42,7 +42,7 @@ function CreateTweet() {
     await getDocs(collection(db, "tweets")).then((querySnapshot) => {
       const newTweetData = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
-        id: doc.id,
+        uid: doc.id,
       }));
       setTweets(
         newTweetData.sort((a, b) => new Date(b.date) - new Date(a.date))

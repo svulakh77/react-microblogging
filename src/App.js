@@ -1,5 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
+import { setDoc,doc } from "firebase/firestore";
 import CreateTweet from "./components/CreateTweet.js";
 import TweetList from "./components/TweetsList.js";
 import { useEffect } from "react";
@@ -55,27 +56,10 @@ function App() {
       )
       .then(fetchData);
   };
-  const [newUserName, setNewUserName] = useState([]);
+  const [newUserName, setNewUserName] = useState();
   // const tempName = currentUser.displayName
   const [userName, setUserName] = useState();
   
-
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     const starCountRef = ref(db, "users/" + currentUser.uid);
-  //     onValue(starCountRef, (snapshot) => {
-  //       if (snapshot.exists()) {
-  //         let data = snapshot.val();
-  //         setUserName(data.firstName + " " + data.lastName);
-  //       }
-  //     });
-  //   }
-  // }, [currentUser]);
-  // const temp = localStorage.getItem("userName") || "sv";
-
-  // const uname = () => {
-  //   setUserName(temp);
-  // };
 
   const handleUserNameInput = (e) => {
     e.preventDefault();
@@ -87,10 +71,15 @@ function App() {
       addUserName();
     }
   };
-  const addUserName = () => {
+  const addUserName = async() => {
     console.log(newUserName);
     setUserName(newUserName);
-  };
+
+    const userRef = doc(db, "users", auth.currentUser.uid)
+    await setDoc(userRef ,{
+      userName: newUserName
+    })
+  }
   useEffect(() => {
     localStorage.setItem("userName", JSON.stringify(userName));
   }, [userName]);
@@ -120,7 +109,6 @@ function App() {
             element={
               <PrivateRoute currentUser={currentUser}>
                 <HomePage />
-                <Profile/>
               </PrivateRoute>
             }
           ></Route>
