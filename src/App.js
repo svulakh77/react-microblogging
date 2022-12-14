@@ -56,7 +56,9 @@ function App() {
       .then(fetchData);
   };
   const [newUserName, setNewUserName] = useState([]);
+  // const tempName = currentUser.displayName
   const [userName, setUserName] = useState();
+  
 
   // useEffect(() => {
   //   if (currentUser) {

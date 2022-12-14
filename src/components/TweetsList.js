@@ -5,6 +5,7 @@ import SomeContext from "../Context.js";
 
 const TweetList = () =>{
     const {tweets,isLoading}= useContext(SomeContext);
+    console.log(tweets)
     return(
         <div className="tweetList">
             {isLoading ? <LoadingSpinner /> : ""}

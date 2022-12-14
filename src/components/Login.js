@@ -12,13 +12,6 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const currentUser=useAuth();
-//   const GoogleLogin = () => {
-//     return (
-//       <div>
-//         <button className="button" onClick={signInWithGoogle}><i className="fab fa-google"></i>Sign in with google</button>
-//       </div>
-//     )
-//   }
 
   const handleLogIn = async (e) => {
     e.preventDefault();

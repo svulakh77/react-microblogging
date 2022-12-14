@@ -4,10 +4,14 @@ import { nanoid } from "nanoid";
 import SomeContext from "../Context.js";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
+import { useAuth,upload } from "../firebase.js";
 
 function CreateTweet() {
   const { tweets, setTweets, addTweet, userName, isLoading, setIsLoading } =
     useContext(SomeContext);
+    const currentUser=useAuth();
+    console.log(currentUser)
+
     setIsLoading(false)
   const collect = collection(db, "tweets");
   const tweetDate = new Date();
@@ -16,13 +20,14 @@ function CreateTweet() {
     e.preventDefault();
 
     try {
-      const idTweet = await addDoc(collect, {
-        userName: userName,
+      const tweetTweet = {
+        userName: currentUser.email,
         date: tweetDate.toISOString(),
         content: text,
         id: nanoid(),
-      });
-      const newArray = [idTweet, ...tweets];
+      }
+      const idTweet = await addDoc(collect, tweetTweet);
+      const newArray = [tweetTweet, ...tweets];
       setTweets(newArray);
       setIsLoading(false)
       console.log("Document written with ID: ", idTweet.id);
@@ -55,20 +60,7 @@ function CreateTweet() {
     setText(e.target.value);
   };
 
-  // // const printTweet = (e) => {
-  // //   e.preventDefault();
-  // //   const newTweet = {
-  // //     date: tweetDate.toISOString(),
-  // //     content: text,
-  // //     userName: userName,
-  // //     id: nanoid(),
-  // //   };
 
-  //   if (text.length > 0) {
-  //     addTweet(newTweet);
-  //     setText("");
-  //   }
-  // };
   return (
     <div className="tweetContainer">
       <form className="textContainer">

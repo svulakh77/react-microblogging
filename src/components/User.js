@@ -56,7 +56,7 @@ export const useAuth = () => {
     isLoading(true);
     setError(false);
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      await signInWithEmailAndPassword(auth, data.displayName, data.email, data.password);
       isLoading(false);
     } catch (error) {
       let systemErrorMessage;

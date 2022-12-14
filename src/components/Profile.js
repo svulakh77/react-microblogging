@@ -13,7 +13,6 @@ function Profile() {
     setIsLoading,
   } = useContext(SomeContext);
   const currentUser=useAuth();
-  // const {upload} = useAuth();
   const [photoURL,setPhotoURL] = useState("https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=is&k=20&c=PJjJWl0njGyow3AefY7KVNuhkbw5r2skqFiCFM5kyic=");
   const [photo,setPhoto] = useState(null);
   const handlePic = (e)=>{

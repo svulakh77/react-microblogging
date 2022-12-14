@@ -24,11 +24,12 @@ export default function SignUp() {
       if (userInfo.password === userInfo.repassword) {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
+          userInfo.displayName,
           userInfo.email,
           userInfo.password
         );
         const newUser = {
-          userName: userInfo.userName,
+          userName: userInfo.displayName,
           email: userInfo.email,
           password: userInfo.password,
         };
@@ -46,7 +47,7 @@ export default function SignUp() {
   return (
     <form className="userForm">
       <h1>Sign Up</h1>
-      <label htmlFor="name">Name</label>
+      <label htmlFor="displayName">Name</label>
       <input
         onChange={handleChange}
         value={userInfo.userName}
