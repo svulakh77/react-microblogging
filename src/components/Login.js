@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../App.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase.js";
+import { auth, useAuth } from "../firebase.js";
 import SomeContext from "../Context";
 import  signInWithGoogle  from '../firebase.js';
 
@@ -11,7 +11,7 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setCurrentUser } = useContext(SomeContext);
+  const currentUser=useAuth();
 //   const GoogleLogin = () => {
 //     return (
 //       <div>
@@ -29,7 +29,6 @@ export default function Login() {
         password
       );
       if (userCredential) {
-        setCurrentUser(userCredential.user.uid);
         localStorage.setItem(
           "currentUser",
           JSON.stringify(userCredential.user.uid)

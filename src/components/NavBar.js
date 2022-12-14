@@ -1,6 +1,6 @@
 import React from "react";
 import { signOut } from "firebase/auth";
-import { auth, db } from "../firebase.js";
+import { auth, db, useAuth } from "../firebase.js";
 import { useNavigate } from "react-router-dom";
 import { ref, onValue } from "firebase/database";
 import axios from "axios";
@@ -13,14 +13,13 @@ import { useContext } from "react";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { setCurrentUser } = useContext(SomeContext);
+  const currentUser=useAuth();
 
   const logout = () => {
     signOut(auth)
       .then(() => {
         navigate("/login");
         console.log("user signed out");
-        setCurrentUser(false)
       })
       .catch((error) => {
         console.log(error);

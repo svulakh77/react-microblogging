@@ -6,11 +6,13 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
 function CreateTweet() {
-  const { tweets, setTweets, addTweet, userName, uname } =
+  const { tweets, setTweets, addTweet, userName, isLoading, setIsLoading } =
     useContext(SomeContext);
+    setIsLoading(false)
   const collect = collection(db, "tweets");
   const tweetDate = new Date();
   const addNewTweet = async (e) => {
+    setIsLoading(true)
     e.preventDefault();
 
     try {
@@ -22,13 +24,16 @@ function CreateTweet() {
       });
       const newArray = [idTweet, ...tweets];
       setTweets(newArray);
+      setIsLoading(false)
       console.log("Document written with ID: ", idTweet.id);
     } catch (e) {
       console.error("Error adding document: ", e);
+      setIsLoading(false)
     }
   };
 
   const fetchTweet = async () => {
+    setIsLoading(true)
     await getDocs(collection(db, "tweets")).then((querySnapshot) => {
       const newTweetData = querySnapshot.docs.map((doc) => ({
         ...doc.data(),

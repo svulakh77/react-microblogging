@@ -22,7 +22,8 @@ function Profile() {
     }
   }
     const handleClick = () =>{
-      upload(photo,currentUser, setIsLoading);
+      upload(photo,currentUser);
+      // setIsLoading(true)
     }
     useEffect(()=>{
       if(currentUser && currentUser?.photoURL){
@@ -50,7 +51,7 @@ function Profile() {
       </form>
       <div className="picFile">
           <input type ='file' onChange={handlePic}></input>
-          <button disabled={isLoading||!photo} onClick={handleClick}>Upload</button>
+          <button onClick={handleClick}>Upload</button>
           <img height="30px" width="30px" src={photoURL} alt="Avatar"className="avatar"></img>
         </div>
     </div>

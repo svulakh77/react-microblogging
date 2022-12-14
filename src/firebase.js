@@ -19,7 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
-const storage = getStorage();
+const storage = getStorage(app);
 // provider.setCustomParameters({ prompt: 'select_account' });
 
 export default async function signInWithGoogle(){
@@ -38,9 +38,14 @@ export function useAuth(){
 export{db,auth }
 
 export async function upload(file, currentUser){
-  const fileRef = ref(storage, currentUser.uid+'.png')
-  const photoURL = await getDownloadURL(fileRef)
-  uploadBytes(fileRef,file)
+  const imagesRef = ref(storage, `images/${currentUser.uid}.jpg`);
+  uploadBytes(imagesRef, file).then((snapshot) => {
+    console.log('Uploaded a blob or file!');
+    console.log(snapshot)
+    console.log(currentUser)
+  });
+  // console.log(response)
+  // const photoURL = await getDownloadURL(imagesRef)
   alert("Uploaded file!")
-  updateProfile(currentUser,{photoURL:photoURL});
+  // updateProfile(currentUser,{photoURL:photoURL});
 }

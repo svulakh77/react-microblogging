@@ -27,18 +27,8 @@ function App() {
   // const [currentUser, setCurrentUser] = useState(
   //   JSON.parse(localStorage.getItem("currentUser")) || false
   // );
-  const navigate = useNavigate();
+ 
 
-  const clickLogin = () => {
-    if (currentUser) {
-      signOut(auth);
-    } else {
-      navigate("/login");
-    }
-  };
-  const clickSignup = () => {
-    navigate("/signup");
-  };
 
   async function fetchData() {
     try {
@@ -128,6 +118,7 @@ function App() {
             element={
               <PrivateRoute currentUser={currentUser}>
                 <HomePage />
+                <Profile/>
               </PrivateRoute>
             }
           ></Route>
