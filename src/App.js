@@ -12,7 +12,7 @@ import SomeContext from "./Context.js";
 import PrivateRoute from "./components/PrivateRoute.js";
 import HomePage from "./components/HomePage.js";
 import { signOut } from "firebase/auth";
-import { auth, db } from "./firebase.js";
+import { auth, db, useAuth } from "./firebase.js";
 import { useNavigate } from "react-router-dom";
 import { ref, onValue } from "firebase/database";
 import Navbar from "./components/NavBar.js";
@@ -23,9 +23,10 @@ import GoogleLogin from "./components/GoogleSignIn.js";
 function App() {
   const [tweets, setTweets] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem("currentUser")) || false
-  );
+  const currentUser=useAuth();
+  // const [currentUser, setCurrentUser] = useState(
+  //   JSON.parse(localStorage.getItem("currentUser")) || false
+  // );
   const navigate = useNavigate();
 
   const clickLogin = () => {
@@ -105,7 +106,7 @@ function App() {
   return (
     <SomeContext.Provider
       value={{
-        setCurrentUser,
+        currentUser,
         tweets,
         setTweets,
         // addTweet,

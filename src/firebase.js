@@ -1,7 +1,9 @@
 import { initializeApp } from "firebase/app";
 import {getFirestore} from 'firebase/firestore';
-import {getAuth} from 'firebase/auth';
+import {getAuth, onAuthStateChanged, updateProfile} from 'firebase/auth';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getStorage, uploadBytes,ref, getDownloadURL } from "firebase/storage";
+import { useEffect,useState } from "react";
 
 
 const firebaseConfig = {
@@ -17,6 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage();
 // provider.setCustomParameters({ prompt: 'select_account' });
 
 export default async function signInWithGoogle(){
@@ -24,5 +27,20 @@ export default async function signInWithGoogle(){
   const response = await signInWithPopup(auth, provider)
   console.log(response.user)
 } ;
-
+export function useAuth(){
+  const[currentUser,setCurrentUser] = useState();
+  useEffect(()=>{
+    const authUser = onAuthStateChanged(auth,user => setCurrentUser(user));
+    return authUser
+  }, [])
+  return currentUser
+}
 export{db,auth }
+
+export async function upload(file, currentUser){
+  const fileRef = ref(storage, currentUser.uid+'.png')
+  const photoURL = await getDownloadURL(fileRef)
+  uploadBytes(fileRef,file)
+  alert("Uploaded file!")
+  updateProfile(currentUser,{photoURL:photoURL});
+}
